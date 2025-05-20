@@ -1,0 +1,226 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Specialist in Ugandan Tug Method</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .hidden { display: none; }
+    .page { min-height: 100vh; padding: 2rem; }
+    nav a { transition: color 0.3s; }
+    nav a:hover { color: #1d4ed8; }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <!-- Navigation -->
+  <nav class="bg-blue-600 text-white p-4 sticky top-0 shadow-md">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold">Ugandan Tug Method</h1>
+      <div class="space-x-4">
+        <a href="#" onclick="showPage('home')" class="hover:underline">Home</a>
+        <a href="#" onclick="showPage('about')" class="hover:underline">About</a>
+        <a href="#" onclick="showPage('practice')" class="hover:underline">How to Practice</a>
+        <a href="#" onclick="showPage('pricing')" class="hover:underline">Pricing</a>
+        <a href="#" onclick="showPage('contact')" class="hover:underline">Contact</a>
+        <a href="#" onclick="showPage('faq')" class="hover:underline">FAQ</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Pages -->
+  <div id="home" class="page">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Welcome to the Specialist in Ugandan Tug Method</h2>
+      <p class="text-lg mb-6">Learn safe, non-invasive tugging techniques inspired by traditional practices in a discreet, online course. Prioritize your privacy and safety while exploring personal wellness.</p>
+      <p class="text-red-600 mb-6">Disclaimer: This course is educational only and not medically endorsed. Consult a healthcare professional before starting.</p>
+      <a href="#" onclick="showPage('pricing')" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Enroll Now</a>
+    </div>
+  </div>
+
+  <div id="about" class="page hidden">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold mb-4">About the Course</h2>
+      <p class="text-lg mb-4">The Specialist in Ugandan Tug Method is a unique program designed to teach safe stretching techniques for male enhancement, inspired by anecdotal cultural practices in Uganda. Our mission is to provide a confidential, supportive environment for learning.</p>
+      <h3 class="text-xl font-semibold mb-2">Why Choose Us?</h3>
+      <ul class="list-disc pl-6 mb-4">
+        <li>Expert-led instruction with a focus on safety.</li>
+        <li>Fully online, ensuring privacy and accessibility.</li>
+        <li>Community support through private forums.</li>
+      </ul>
+      <p class="text-red-600">Note: No medical claims are made. Participants must consult a doctor to ensure safety.</p>
+    </div>
+  </div>
+
+  <div id="practice" class="page hidden">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold mb-4">How to Practice the Ugandan Tug Method</h2>
+      <p class="text-lg mb-4">This section outlines safe, beginner-friendly tugging techniques. Always consult a healthcare professional before starting, as improper practice may cause discomfort or injury.</p>
+      <h3 class="text-xl font-semibold mb-2">Step-by-Step Guide</h3>
+      <ol class="list-decimal pl-6 mb-4">
+        <li><strong>Preparation</strong>: Ensure a clean, private environment. Wash hands and the area thoroughly to maintain hygiene.</li>
+        <li><strong>Warm-Up</strong>: Apply a warm compress (e.g., a towel soaked in warm water) for 5-10 minutes to relax tissues and improve blood flow.</li>
+        <li><strong>Gentle Stretching</strong>: Using clean hands, apply slow, gentle pulling motions for 5-10 seconds per repetition. Start with light pressure to avoid strain.</li>
+        <li><strong>Rest and Monitor</strong>: Rest for 1-2 minutes between sets. Stop immediately if you feel pain or discomfort.</li>
+        <li><strong>Hygiene and Aftercare</strong>: Clean the area post-session and apply a mild, non-irritating moisturizer if needed.</li>
+      </ol>
+      <h3 class="text-xl font-semibold mb-2">Safety Tips</h3>
+      <ul class="list-disc pl-6 mb-4">
+        <li>Never exceed 10-15 minutes per session to avoid tissue stress.</li>
+        <li>Consult a urologist before starting to assess health risks.</li>
+        <li>Avoid aggressive pulling or unverified devices, which may cause injury.</li>
+      </ul>
+      <p class="text-red-600">Warning: No scientific evidence supports the efficacy of these techniques. Proceed with caution and prioritize health.</p>
+      <a href="#" onclick="showPage('pricing')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Join the Course for Full Guidance</a>
+    </div>
+  </div>
+
+  <div id="pricing" class="page hidden">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold mb-4">Pricing & Packages</h2>
+      <p class="text-lg mb-4">Choose the package that suits your needs. All prices in Ugandan Shillings (UGX) and USD (1 USD ≈ 3,700 UGX).</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2">Basic Package</h3>
+          <p class="mb-2">1-week online theory course.</p>
+          <p class="text-lg font-bold mb-2">UGX 200,000 (~USD 54)</p>
+          <p>Includes: Lectures, PDF guides, Q&A forum, certificate.</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2">Standard Package</h3>
+          <p class="mb-2">3 weeks (theory + guided practice).</p>
+          <p class="text-lg font-bold mb-2">UGX 500,000 (~USD 135)</p>
+          <p>Includes: Lectures, coaching, starter kit, community, certificate.</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2">Premium Package</h3>
+          <p class="mb-2">3 weeks + 2 consultations.</p>
+          <p class="text-lg font-bold mb-2">UGX 850,000 (~USD 230)</p>
+          <p>Includes: All Standard features, consultations, lifetime access.</p>
+        </div>
+      </div>
+      <p class="mt-4">For group pricing, DM us. Payments via MTN/Airtel Mobile Money or PayPal.</p>
+      <a href="#" onclick="showPage('contact')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Enroll Now</a>
+    </div>
+  </div>
+
+  <div id="contact" class="page hidden">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold mb-4">Contact Us</h2>
+      <p class="text-lg mb-4">Ready to enroll or have questions? Fill out the form below or DM us. Your privacy is guaranteed.</p>
+      <div class="max-w-md mx-auto">
+        <div class="mb-4">
+          <label class="block text-lg mb-2" for="name">Name</label>
+          <input id="name" type="text" class="w-full p-2 border rounded" placeholder="Your Name" required>
+        </div>
+        <div class="mb-4">
+          <label class="block text-lg mb-2" for="email">Email</label>
+          <input id="email" type="email" class="w-full p-2 border rounded" placeholder="Your Email" required>
+        </div>
+        <div class="mb-4">
+          <label class="block text-lg mb-2" for="message">Message</label>
+          <textarea id="message" class="w-full p-2 border rounded" rows="4" placeholder="Your Message or Package Choice" required></textarea>
+        </div>
+        <button onclick="submitForm()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Submit</button>
+      </div>
+      <p class="mt-4">Or DM us at: <a href="mailto:info@tugmethod.com" class="text-blue-600">info@tugmethod.com</a></p>
+    </div>
+  </div>
+
+  <div id="faq" class="page hidden">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-xl font-semibold">Is the Ugandan Tug Method safe?</h3>
+          <p>Safety depends on proper technique and medical clearance. Our course emphasizes safe practices, but you must consult a doctor first.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold">What results can I expect?</h3>
+          <p>No results are guaranteed, as the method lacks scientific backing. The course focuses on education and safety.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold">How is privacy ensured?</h3>
+          <p>All course materials and interactions are confidential. We use secure platforms and protect your data.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold">Can I get a refund?</h3>
+          <p>Refunds are available within 7 days if no course content is accessed. Contact us for details.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white p-4 mt-8">
+    <div class="container mx-auto text-center">
+      <p>&copy; 2025 Ugandan Tug Method Course. All rights reserved.</p>
+      <p class="text-sm">Disclaimer: This course is not medically endorsed. Consult a healthcare professional before participating.</p>
+    </div>
+  </footer>
+
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+      document.getElementById(pageId).classList.remove('hidden');
+    }
+
+    function submitForm() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+      if (name && email && message) {
+        alert('Thank you for your submission! We will contact you soon.');
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('message').value = '';
+      } else {
+        alert('Please fill out all fields.');
+      }
+    }
+
+    // Show home page by default
+    showPage('home');
+  </script>
+</body>
+</html>
